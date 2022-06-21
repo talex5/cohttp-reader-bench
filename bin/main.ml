@@ -34,6 +34,9 @@ module Old = struct
     | `Quoted_string -> quoted_string
     | `Take4 -> take 4
 
+  (* Avoid memory leak! *)
+  let p = p <* commit
+
   let test () =
     let r = Reader.create 1024 (Eio.Flow.cstruct_source [data]) in
     let i = ref 0 in
