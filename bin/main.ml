@@ -1,7 +1,5 @@
 open Eio.Std
 
-module Buf_read = Eio.Buf_read
-
 let use_backtracing_in_old = true
 
 let n = 10_000_000
