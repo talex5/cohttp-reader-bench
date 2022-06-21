@@ -67,7 +67,6 @@ let peek t =
   Cstruct.of_bigarray ~off:t.pos ~len:t.len t.buf
 
 let consume t n =
-  if n < 0 || n > t.len then Fmt.invalid_arg "Can't consume %d bytes of a %d byte buffer!" n t.len;
   t.pos <- t.pos + n;
   t.len <- t.len - n;
   t.consumed <- t.consumed + n
@@ -326,3 +325,7 @@ let seq ?(stop=at_end_of_input) p t =
   aux t.consumed
 
 let lines t = seq line t
+
+let consume t n =
+  if n < 0 || n > t.len then Fmt.invalid_arg "Can't consume %d bytes of a %d byte buffer!" n t.len;
+  consume t n
